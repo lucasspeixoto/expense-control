@@ -14,23 +14,20 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    IncomeExpensesComponent,
-    StatisticsComponent,
-    DetailComponent,
-    NavbarComponent,
-    SidebarComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		RegisterComponent,
+		DashboardComponent,
+		IncomeExpensesComponent,
+		StatisticsComponent,
+		DetailComponent,
+		NavbarComponent,
+		SidebarComponent,
+		FooterComponent,
+	],
+	imports: [BrowserModule, AppRoutingModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

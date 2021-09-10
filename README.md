@@ -18,11 +18,9 @@ Os projetos são desenvolvidos com as seguintes tecnologias:
 - [NgRx](https://ngrx.io/)
 - [Firebase](https://firebase.google.com/)
 
-<!-- ## 🔖 Layout
+## 🔖 Layout
 
-![interface](src/assets/images/vertical.png "Vertical")
-
-![interface](src/assets/images/horizontal.png "Horizontal") -->
+![caption](src/assets/presentation.gif)
 
 ## 🚀 Instalação
 
