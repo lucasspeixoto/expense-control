@@ -6,17 +6,17 @@
 
 ## 💻 Repositório
 
-[Expense Control](https://github.com/lucasspeixoto/expense_control) é um aplicativo gerenciamento
-e controla de minhas despesas pessoais.
+[Expense Control](https://github.com/lucasspeixoto/expense-control) é um aplicativo gerenciamento para gerenciamento e controle das despesas de minha familia.
 
 ## ✨ Tecnologias
 
-Os projetos são desenvolvidos com as seguintes tecnologias:
+O projeto Foi desenvolvido com as seguintes tecnologias:
 
 - [Angular](https://angular.io/startg)
 - [Redux](https://firebase.google.com/)
 - [NgRx](https://ngrx.io/)
 - [Firebase](https://firebase.google.com/)
+- [Bootstrap](https://getbootstrap.com/)
 
 ## 🔖 Layout
 

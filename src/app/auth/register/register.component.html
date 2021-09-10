@@ -13,13 +13,47 @@
 			<div class="col-lg-4 mx-auto">
 				<h2 class="text-center mb-4">Cadastro</h2>
 				<div class="auto-form-wrapper">
-					<form action="#">
+					<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="email" class="form-control" placeholder="E-mail" />
+								<input
+									type="text"
+									class="form-control"
+									formControlName="name"
+									placeholder="Nome"
+									required
+									minlength="3"
+								/>
 								<div class="input-group-append">
 									<span class="input-group-text">
-										<i class="fa fa-check-circle"></i>
+										<i
+											[ngClass]="{
+												valid: registerForm.controls.name.valid
+											}"
+											class="fa fa-check-circle"
+										></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input
+									type="email"
+									class="form-control"
+									formControlName="email"
+									placeholder="E-mail"
+									required
+									minlength="11"
+								/>
+								<div class="input-group-append">
+									<span class="input-group-text">
+										<i
+											[ngClass]="{
+												valid: registerForm.controls.email.valid
+											}"
+											class="fa fa-check-circle"
+										></i>
 									</span>
 								</div>
 							</div>
@@ -29,21 +63,33 @@
 								<input
 									type="password"
 									class="form-control"
+									formControlName="password"
 									placeholder="Senha"
+									required
+									minlength="3"
 								/>
 								<div class="input-group-append">
 									<span class="input-group-text">
-										<i class="fa fa-check-circle"></i>
+										<i
+											[ngClass]="{
+												valid: registerForm.controls.password.valid
+											}"
+											class="fa fa-check-circle"
+										></i>
 									</span>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<button class="btn btn-primary submit-btn btn-block">
+							<button
+								type="submit"
+								class="btn btn-primary submit-btn btn-block"
+							>
 								Criar Conta
 							</button>
 						</div>
+
 						<div class="text-block text-center my-3">
 							<span class="text-small font-weight-semibold"
 								>Ja tem uma conta?</span

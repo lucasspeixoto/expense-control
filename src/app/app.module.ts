@@ -12,6 +12,12 @@ import { DetailComponent } from './income-expenses/detail/detail.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
 	declarations: [
@@ -26,8 +32,15 @@ import { FooterComponent } from './shared/footer/footer.component';
 		SidebarComponent,
 		FooterComponent,
 	],
-	imports: [BrowserModule, AppRoutingModule],
-	providers: [],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		ReactiveFormsModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireDatabaseModule,
+		AngularFirestoreModule,
+	],
+	providers: [AuthService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
