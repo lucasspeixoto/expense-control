@@ -6,8 +6,8 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
-import { AuthData } from './models/auth-data.model';
-import { User } from './models/user.model';
+import { AuthData } from '../models/auth-data.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -41,15 +41,18 @@ export class AuthService {
 
 	registerUser(authData: AuthData) {
 		//this.store.dispatch(new UI.StartLoading());
+		//const {name, email, password} = authData;
 		this.angularFireAuth
 			.createUserWithEmailAndPassword(authData.email, authData.password)
 			.then(result => {
 				let user = {
+					name: authData.name,
 					userId: result.user.uid,
 					email: result.user.email,
 				};
 				this.setUserData(user);
-        this.setUserLocally(user);
+				this.setUserLocally(user);
+				this.router.navigateByUrl('/');
 				/* this.store.dispatch(new UI.StopLoading());
 				this.uiService.showMessage('SignIn', 'X'); */
 			})

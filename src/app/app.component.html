@@ -1,3 +1,4 @@
 <div class="container-scroller">
+	<app-loading *ngIf="isLoading$ | async"></app-loading>
 	<router-outlet></router-outlet>
 </div>
