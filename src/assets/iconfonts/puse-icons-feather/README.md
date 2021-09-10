@@ -21,7 +21,7 @@ Manually
 2. Include `feather.css` in the `<head>` of your HTML document
 
 ```html
-<link rel="stylsheet" href="path/to/feather.css">
+<link rel="stylsheet" href="path/to/feather.css" />
 ```
 
 ## Usage
@@ -32,7 +32,6 @@ Insert the icon's class name into any HTML element or insert a `data-icon` attri
 <span class="icon-eye"></span>
 <span data-icon="&#xe000"></span>
 ```
-
 
 ## Changelog
 

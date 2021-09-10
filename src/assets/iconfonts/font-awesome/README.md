@@ -1,4 +1,5 @@
 # [Font Awesome v4.7.0](http://fontawesome.io)
+
 ### The iconic font and CSS framework
 
 Font Awesome is a full suite of 675 pictographic icons for easy scalable vector graphics on websites,
@@ -9,6 +10,7 @@ Stay up to date with the latest release and announcements on Twitter:
 Get started at http://fontawesome.io!
 
 ## License
+
 - The Font Awesome font is licensed under the SIL OFL 1.1:
   - http://scripts.sil.org/OFL
 - Font Awesome CSS, LESS, and Sass files are licensed under the MIT License:
@@ -20,6 +22,7 @@ Get started at http://fontawesome.io!
 - Full details: http://fontawesome.io/license/
 
 ## Changelog
+
 - [v4.7.0 GitHub pull request](https://github.com/FortAwesome/Font-Awesome/pull/10012)
 - [v4.6.3 GitHub pull request](https://github.com/FortAwesome/Font-Awesome/pull/9189)
 - [v4.6.3 GitHub pull request](https://github.com/FortAwesome/Font-Awesome/pull/9189)
@@ -57,18 +60,20 @@ with the following format:
 
 And constructed with the following guidelines:
 
-* Breaking backward compatibility bumps the major (and resets the minor and patch)
-* New additions, including new icons, without breaking backward compatibility bumps the minor (and resets the patch)
-* Bug fixes, changes to brand logos, and misc changes bumps the patch
+- Breaking backward compatibility bumps the major (and resets the minor and patch)
+- New additions, including new icons, without breaking backward compatibility bumps the minor (and resets the patch)
+- Bug fixes, changes to brand logos, and misc changes bumps the patch
 
 For more information on SemVer, please visit http://semver.org.
 
 ## Author
+
 - Email: dave@fontawesome.io
 - Twitter: http://twitter.com/davegandy
 - GitHub: https://github.com/davegandy
 
 ## Component
+
 To include as a [component](https://github.com/componentjs/component), just run
 
     $ component install FortAwesome/Font-Awesome
@@ -85,7 +90,7 @@ to the `dependencies` in your `component.json`.
 
 - [Ruby](https://www.ruby-lang.org/en/)
 - Ruby Development Headers
-  - **Ubuntu:** `sudo apt-get install ruby-dev` *(Only if you're __NOT__ using `rbenv` or `rvm`)*
+  - **Ubuntu:** `sudo apt-get install ruby-dev` _(Only if you're **NOT** using `rbenv` or `rvm`)_
   - **Windows:** [DevKit](http://rubyinstaller.org/)
 - [Bundler](http://bundler.io/) (Run `gem install bundler` to install).
 - [Node Package Manager (AKA NPM)](https://docs.npmjs.com/getting-started/installing-node)
