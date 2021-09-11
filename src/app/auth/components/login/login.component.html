@@ -16,7 +16,7 @@
 									[ngClass]="{ invalid: commonService.validEmail(loginForm) }"
 									class="form-control"
 									placeholder="E-mail"
-                  required
+									required
 								/>
 								<div class="input-group-append">
 									<span class="input-group-text">
@@ -38,7 +38,7 @@
 									formControlName="password"
 									class="form-control"
 									placeholder="*********"
-                  required
+									required
 								/>
 								<div class="input-group-append">
 									<span class="input-group-text">
@@ -72,10 +72,11 @@
 							<span class="text-small font-weight-semibold"
 								>Não está cadastrado?
 							</span>
-							<br />
-							<a routerLink="/register" class="text-black text-small"
-								>Criar uma conta</a
-							>
+
+							<a routerLink="/register" class="text-small">Criar uma conta</a>
+						</div>
+						<div class="text-block text-center my-3">
+							<a routerLink="/forgot-password">Esqueceu a senha ?</a>
 						</div>
 					</form>
 				</div>

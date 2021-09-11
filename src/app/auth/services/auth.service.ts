@@ -100,10 +100,30 @@ export class AuthService {
 			});
 	}
 
+	forgotPassword(email: string) {
+		return this.angularFireAuth
+			.sendPasswordResetEmail(email)
+			.then(() => {
+				Swal.fire({
+					icon: 'info',
+					title: 'E-mail enviado',
+					text: 'O link para alteração foi enviado por e-mail, verifique sua caixa',
+				});
+			})
+			.catch(error => {
+        console.log(error)
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
+			});
+	}
+
 	logout() {
 		this.removeUserLocally();
 		this.angularFireAuth.signOut();
-    this.router.navigateByUrl('/login');
+		this.router.navigateByUrl('/login');
 	}
 
 	getUserData(userId: string) {
