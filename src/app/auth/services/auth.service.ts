@@ -4,6 +4,8 @@ import {
 	AngularFirestore,
 	AngularFirestoreDocument,
 } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
+
 import { Router } from '@angular/router';
 
 //* NgRx
@@ -111,6 +113,33 @@ export class AuthService {
 					text: Text[error.code],
 				});
 			});
+	}
+
+	authLogin(provider) {
+		return this.angularFireAuth
+			.signInWithPopup(provider)
+			.then(result => {
+				let user = {
+					name: result.user.displayName,
+					userId: result.user.uid,
+					email: result.user.email,
+				};
+				this.setUserData(user);
+				this.setUserLocally(user);
+				this.router.navigateByUrl('/');
+			})
+			.catch(error => {
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
+				this.store.dispatch(UI.StopLoading());
+			});
+	}
+
+	loginWithGoogle() {
+		return this.authLogin(new firebase.auth.GoogleAuthProvider());
 	}
 
 	forgotPassword(email: string) {
