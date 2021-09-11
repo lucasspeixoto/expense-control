@@ -41,7 +41,9 @@
 								<input
 									type="email"
 									class="form-control"
-                  [ngClass]="{ invalid: commonService.validEmail(registerForm) }"
+									[ngClass]="{
+										invalid: commonService.validEmail(registerForm)
+									}"
 									formControlName="email"
 									placeholder="E-mail"
 									required
@@ -91,7 +93,6 @@
 								Criar Conta
 							</button>
 						</div>
-
 						<div class="text-block text-center my-3">
 							<span class="text-small font-weight-semibold"
 								>Ja tem uma conta?</span
@@ -104,6 +105,4 @@
 			</div>
 		</div>
 	</div>
-	<!-- content-wrapper ends -->
 </div>
-<!-- page-body-wrapper ends -->

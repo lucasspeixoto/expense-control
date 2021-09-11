@@ -4,6 +4,8 @@ import {
 	AngularFirestore,
 	AngularFirestoreDocument,
 } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
+
 import { Router } from '@angular/router';
 
 //* NgRx
@@ -68,7 +70,7 @@ export class AuthService {
 				};
 				this.setUserData(user);
 				this.setUserLocally(user);
-				this.router.navigateByUrl('/');
+				this.sendVerificationMail();
 				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
@@ -78,6 +80,19 @@ export class AuthService {
 					title: Title[error.code],
 					text: Text[error.code],
 				});
+			});
+	}
+
+	async sendVerificationMail() {
+		return await (await this.angularFireAuth.currentUser)
+			.sendEmailVerification()
+			.then(() => {
+				Swal.fire({
+					icon: 'info',
+					title: 'E-mail enviado',
+					text: 'Verifique sua caixa para confirmação do cadastro',
+				});
+				this.router.navigateByUrl('/login');
 			});
 	}
 
@@ -100,10 +115,57 @@ export class AuthService {
 			});
 	}
 
+	authLogin(provider) {
+		return this.angularFireAuth
+			.signInWithPopup(provider)
+			.then(result => {
+				let user = {
+					name: result.user.displayName,
+					userId: result.user.uid,
+					email: result.user.email,
+				};
+				this.setUserData(user);
+				this.setUserLocally(user);
+				this.router.navigateByUrl('/');
+			})
+			.catch(error => {
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
+				this.store.dispatch(UI.StopLoading());
+			});
+	}
+
+	loginWithGoogle() {
+		return this.authLogin(new firebase.auth.GoogleAuthProvider());
+	}
+
+	forgotPassword(email: string) {
+		return this.angularFireAuth
+			.sendPasswordResetEmail(email)
+			.then(() => {
+				Swal.fire({
+					icon: 'info',
+					title: 'E-mail enviado',
+					text: 'O link para alteração foi enviado por e-mail, verifique sua caixa',
+				});
+			})
+			.catch(error => {
+				console.log(error);
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
+			});
+	}
+
 	logout() {
 		this.removeUserLocally();
 		this.angularFireAuth.signOut();
-    this.router.navigateByUrl('/login');
+		this.router.navigateByUrl('/login');
 	}
 
 	getUserData(userId: string) {

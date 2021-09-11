@@ -23,6 +23,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
 import { CommonService } from './shared/services/common.service';
+import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { CommonService } from './shared/services/common.service';
 		SidebarComponent,
 		FooterComponent,
 		LoadingComponent,
+		ForgotPasswordComponent,
 	],
 	imports: [
 		BrowserModule,
