@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromRoot from './app.reducer';
 
 @Component({
 	selector: 'app-root',
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	title = 'expense-control';
+	isLoading$: Observable<boolean>;
+
+	constructor(private store: Store<fromRoot.AppState>) {
+		this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+	}
 }

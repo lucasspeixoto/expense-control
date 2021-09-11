@@ -41,6 +41,7 @@
 								<input
 									type="email"
 									class="form-control"
+                  [ngClass]="{ invalid: commonService.validEmail(registerForm) }"
 									formControlName="email"
 									placeholder="E-mail"
 									required
@@ -85,6 +86,7 @@
 							<button
 								type="submit"
 								class="btn btn-primary submit-btn btn-block"
+								[disabled]="!registerForm.valid"
 							>
 								Criar Conta
 							</button>

@@ -6,15 +6,31 @@ import {
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
-import { AuthData } from './models/auth-data.model';
-import { User } from './models/user.model';
+//* NgRx
+import { Store } from '@ngrx/store';
+
+//* Redux
+import * as UI from '../../shared/store/ui/ui.actions';
+import * as fromRoot from '../../app.reducer';
+
+import { take } from 'rxjs/operators';
+
+import { AuthData } from '../models/auth-data.model';
+import { User } from '../models/user.model';
+
+//* Mensagens
+import Swal from 'sweetalert2';
+import { Title, Text } from '../../shared/messages/messages';
 
 @Injectable()
 export class AuthService {
+	user: User;
+
 	constructor(
 		private router: Router,
 		private angularFireAuth: AngularFireAuth,
 		private angularFirestore: AngularFirestore,
+		private store: Store<fromRoot.AppState>,
 	) {}
 
 	setUserLocally(user: User) {
@@ -40,47 +56,65 @@ export class AuthService {
 	} */
 
 	registerUser(authData: AuthData) {
-		//this.store.dispatch(new UI.StartLoading());
+		this.store.dispatch(UI.StartLoading());
+		const { name, email, password } = authData;
 		this.angularFireAuth
-			.createUserWithEmailAndPassword(authData.email, authData.password)
+			.createUserWithEmailAndPassword(email, password)
 			.then(result => {
 				let user = {
+					name: name,
 					userId: result.user.uid,
 					email: result.user.email,
 				};
 				this.setUserData(user);
-        this.setUserLocally(user);
-				/* this.store.dispatch(new UI.StopLoading());
-				this.uiService.showMessage('SignIn', 'X'); */
+				this.setUserLocally(user);
+				this.router.navigateByUrl('/');
+				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
-				/* this.store.dispatch(new UI.StopLoading());
-				this.uiService.showMessage(error.message, 'X'); */
+				this.store.dispatch(UI.StopLoading());
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
 			});
 	}
 
 	login(authData: AuthData) {
-		//this.store.dispatch(new UI.StartLoading());
+		this.store.dispatch(UI.StartLoading());
 		this.angularFireAuth
 			.signInWithEmailAndPassword(authData.email, authData.password)
 			.then(result => {
-				let user = {
-					userId: result.user.uid,
-					email: result.user.email,
-				};
-				this.setUserLocally(user);
-				/* this.store.dispatch(new UI.StopLoading());
-				this.uiService.showMessage('Logged In', 'X'); */
+				this.getUserData(result.user.uid);
+				this.router.navigateByUrl('/');
+				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
-				/* this.store.dispatch(new UI.StopLoading());
-				this.uiService.showMessage(error.message, 'X'); */
+				this.store.dispatch(UI.StopLoading());
+				Swal.fire({
+					icon: 'error',
+					title: Title[error.code],
+					text: Text[error.code],
+				});
 			});
 	}
 
 	logout() {
 		this.removeUserLocally();
 		this.angularFireAuth.signOut();
+    this.router.navigateByUrl('/login');
+	}
+
+	getUserData(userId: string) {
+		this.angularFirestore
+			.collection(`users`)
+			.valueChanges()
+			.pipe(take(1))
+			.subscribe((users: User[]) => {
+				this.user = users.find((user: User) => user.userId === userId);
+				this.setUserLocally(this.user);
+			});
 	}
 
 	setUserData(user: User) {
@@ -88,6 +122,7 @@ export class AuthService {
 			`users/${user.userId}`,
 		);
 		const userData: User = {
+			name: user.name,
 			userId: user.userId,
 			email: user.email,
 		};
