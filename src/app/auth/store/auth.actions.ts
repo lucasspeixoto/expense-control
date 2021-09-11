@@ -1,17 +1,8 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { User } from '../models/user.model';
 
-export const SET_AUTHENTICATED = '[Auth] Set Authenticated';
-export const SET_UNAUTHENTICATED = '[Auth] Set Unauthenticated';
+export const SET_USER_DATA = '[Auth] Set User Data';
+export const REMOVE_USER_DATA = '[Auth] Remove User Data';
 
-export const SetAuthenticated = createAction(SET_AUTHENTICATED);
-export const SetUnauthenticated = createAction(SET_UNAUTHENTICATED);
-
-/* import { createAction, props } from "@ngrx/store";
-import { User } from "../models/user.model";
-
-export const login = createAction(
-  "[Login Page] User Login",
-  props<{ user: User }>()
-);
-
-export const logout = createAction("[Sidebar] Logout"); */
+export const setUser = createAction(SET_USER_DATA, props<{ user: User }>());
+export const removeUser = createAction(REMOVE_USER_DATA);

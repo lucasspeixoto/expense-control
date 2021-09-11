@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-//* Redux
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { AuthService } from '../../services/auth.service';

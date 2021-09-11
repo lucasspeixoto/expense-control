@@ -47,9 +47,9 @@ export class AuthService {
 	initAuthListener() {
 		this.angularFireAuth.authState.subscribe(user => {
 			if (user) {
-				this.store.dispatch(AUTH.SetAuthenticated());
+				//this.store.dispatch(AUTH.SetAuthenticated());
 			} else {
-				this.store.dispatch(AUTH.SetUnauthenticated());
+				//this.store.dispatch(AUTH.SetUnauthenticated());
 				this.removeUserLocally();
 			}
 		});
