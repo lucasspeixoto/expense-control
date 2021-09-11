@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 	selector: 'app-loading',
 	template: `
 		<div class="d-flex justify-content-center spinner-container">
-			<div class="spinner-border" role="status">
-				<span class="visually-hidden">Loading...</span>
+			<div class="spinner-grow" role="status">
+				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
 	`,

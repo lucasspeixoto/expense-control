@@ -71,7 +71,7 @@ export class AuthService {
 					email: result.user.email,
 				};
 				this.setUserData(user);
-				this.setUserLocally(user);
+				/* this.setUserLocally(user); */
 				this.sendVerificationMail();
 				this.store.dispatch(UI.StopLoading());
 			})
@@ -91,7 +91,7 @@ export class AuthService {
 			.then(() => {
 				Swal.fire({
 					icon: 'info',
-					title: 'E-mail enviado',
+					title: 'Cadastro realizado',
 					text: 'Verifique sua caixa para confirmação do cadastro',
 				});
 				this.router.navigateByUrl('/login');
@@ -181,7 +181,7 @@ export class AuthService {
 	}
 
 	setUserData(user: User) {
-		const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+		const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(
 			`users/${user.userId}`,
 		);
 		const userData: User = {

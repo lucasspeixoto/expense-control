@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-//* NgRx
-import { Store } from '@ngrx/store';
-
 //* Redux
-import * as UI from '../../../shared/store/ui/ui.actions';
-import * as fromRoot from '../../../app.reducer';
-
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { AuthService } from '../../services/auth.service';
@@ -22,10 +15,8 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private store: Store<fromRoot.AppState>,
-		private router: Router,
 		public commonService: CommonService,
-    private authService: AuthService,
+		private authService: AuthService,
 	) {}
 
 	ngOnInit(): void {
@@ -43,7 +34,7 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-  loginWithGoogle() {
-    this.authService.loginWithGoogle()
-  }
+	loginWithGoogle() {
+		this.authService.loginWithGoogle();
+	}
 }
