@@ -24,6 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
 import { CommonService } from './shared/services/common.service';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
 	declarations: [
@@ -52,6 +53,7 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
+    EffectsModule.forRoot([]),
 	],
 	providers: [AuthService, CommonService],
 	bootstrap: [AppComponent],

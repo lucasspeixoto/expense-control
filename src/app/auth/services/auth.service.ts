@@ -13,9 +13,10 @@ import { Store } from '@ngrx/store';
 
 //* Redux
 import * as UI from '../../shared/store/ui/ui.actions';
+import * as AUTH from '../../auth/store/auth.actions';
 import * as fromRoot from '../../app.reducer';
 
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { AuthData } from '../models/auth-data.model';
 import { User } from '../models/user.model';
@@ -43,19 +44,20 @@ export class AuthService {
 		localStorage.removeItem('user');
 	}
 
-	/* initAuthListener() {
+	initAuthListener() {
 		this.angularFireAuth.authState.subscribe(user => {
 			if (user) {
-				this.store.dispatch(new Auth.SetAuthenticated());
-				this.router.navigate(['/training']);
+				this.store.dispatch(AUTH.SetAuthenticated());
 			} else {
-				this.trainingService.cancelSubscriptions();
-				this.store.dispatch(new Auth.SetUnauthenticated());
+				this.store.dispatch(AUTH.SetUnauthenticated());
 				this.removeUserLocally();
-				this.router.navigate(['/login']);
 			}
 		});
-	} */
+	}
+
+	isAuth() {
+		return this.angularFireAuth.authState.pipe(map(user => user != null));
+	}
 
 	registerUser(authData: AuthData) {
 		this.store.dispatch(UI.StartLoading());
@@ -116,6 +118,7 @@ export class AuthService {
 	}
 
 	authLogin(provider) {
+		console.log(provider);
 		return this.angularFireAuth
 			.signInWithPopup(provider)
 			.then(result => {
@@ -134,7 +137,6 @@ export class AuthService {
 					title: Title[error.code],
 					text: Text[error.code],
 				});
-				this.store.dispatch(UI.StopLoading());
 			});
 	}
 
@@ -153,7 +155,6 @@ export class AuthService {
 				});
 			})
 			.catch(error => {
-				console.log(error);
 				Swal.fire({
 					icon: 'error',
 					title: Title[error.code],
