@@ -22,6 +22,7 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
+import { CommonService } from './shared/services/common.service';
 
 @NgModule({
 	declarations: [
@@ -50,7 +51,7 @@ import { reducers } from './app.reducer';
 			logOnly: environment.production,
 		}),
 	],
-	providers: [AuthService],
+	providers: [AuthService, CommonService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

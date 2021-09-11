@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/shared/services/common.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class RegisterComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
+    public commonService: CommonService,
 	) {}
 
 	ngOnInit(): void {
