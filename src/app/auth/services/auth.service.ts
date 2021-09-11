@@ -47,10 +47,17 @@ export class AuthService {
 	initAuthListener() {
 		this.angularFireAuth.authState.subscribe(user => {
 			if (user) {
-				//this.store.dispatch(AUTH.SetAuthenticated());
+				this.angularFirestore
+					.doc(`users/${user.uid}`)
+					.valueChanges()
+					.pipe(take(1))
+					.subscribe((databaseUser: User) => {
+            console.log(databaseUser)
+						const user = User.fromDataBase(databaseUser);
+						this.store.dispatch(AUTH.setUser({ user }));
+					});
 			} else {
-				//this.store.dispatch(AUTH.SetUnauthenticated());
-				this.removeUserLocally();
+				this.store.dispatch(AUTH.removeUser());
 			}
 		});
 	}
@@ -71,7 +78,6 @@ export class AuthService {
 					email: result.user.email,
 				};
 				this.setUserData(user);
-				/* this.setUserLocally(user); */
 				this.sendVerificationMail();
 				this.store.dispatch(UI.StopLoading());
 			})
@@ -118,7 +124,6 @@ export class AuthService {
 	}
 
 	authLogin(provider) {
-		console.log(provider);
 		return this.angularFireAuth
 			.signInWithPopup(provider)
 			.then(result => {
@@ -165,6 +170,7 @@ export class AuthService {
 
 	logout() {
 		this.removeUserLocally();
+		this.store.dispatch(AUTH.removeUser());
 		this.angularFireAuth.signOut();
 		this.router.navigateByUrl('/login');
 	}

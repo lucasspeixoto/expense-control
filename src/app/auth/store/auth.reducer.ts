@@ -12,7 +12,6 @@ export const initialState: AuthState = {
 
 const _authReducer = createReducer(
 	initialState,
-
 	on(setUser, (state, props) => ({ ...state, user: { ...props.user } })),
 	on(removeUser, state => ({ ...state, user: null })),
 );
@@ -20,3 +19,5 @@ const _authReducer = createReducer(
 export function authReducer(state: AuthState, action: Action) {
 	return _authReducer(state, action);
 }
+
+export const getUserData = (state: AuthState) => state.user;
