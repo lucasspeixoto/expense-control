@@ -68,7 +68,7 @@ export class AuthService {
 				};
 				this.setUserData(user);
 				this.setUserLocally(user);
-				this.router.navigateByUrl('/');
+				this.sendVerificationMail();
 				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
@@ -78,6 +78,19 @@ export class AuthService {
 					title: Title[error.code],
 					text: Text[error.code],
 				});
+			});
+	}
+
+	async sendVerificationMail() {
+		return await (await this.angularFireAuth.currentUser)
+			.sendEmailVerification()
+			.then(() => {
+				Swal.fire({
+					icon: 'info',
+					title: 'E-mail enviado',
+					text: 'Verifique sua caixa para confirmação do cadastro',
+				});
+				this.router.navigateByUrl('/login');
 			});
 	}
 
@@ -111,7 +124,7 @@ export class AuthService {
 				});
 			})
 			.catch(error => {
-        console.log(error)
+				console.log(error);
 				Swal.fire({
 					icon: 'error',
 					title: Title[error.code],
