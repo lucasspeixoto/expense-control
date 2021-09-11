@@ -19,7 +19,7 @@
 	</div>
 
 	<div class="navbar-menu-wrapper d-flex align-items-center">
-		<ul class="navbar-nav navbar-nav-right">
+		<ul class="navbar-nav navbar-nav-right" *ngIf="user$ | async as user">
 			<li class="nav-item d-none d-sm-inline-block">
 				<a
 					class="nav-link"
@@ -28,7 +28,7 @@
 					data-toggle="dropdown"
 					aria-expanded="false"
 				>
-					<span class="profile-text">Olá, Lucas Peixoto !</span>
+					<span class="profile-text">Olá, {{user.name}} !</span>
 					<img
 						class="img-xs rounded-circle"
 						src="assets/images/faces/lucas.jpg"

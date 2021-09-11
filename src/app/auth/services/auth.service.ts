@@ -52,7 +52,6 @@ export class AuthService {
 					.valueChanges()
 					.pipe(take(1))
 					.subscribe((databaseUser: User) => {
-            console.log(databaseUser)
 						const user = User.fromDataBase(databaseUser);
 						this.store.dispatch(AUTH.setUser({ user }));
 					});

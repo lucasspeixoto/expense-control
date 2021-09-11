@@ -1,5 +1,5 @@
 <nav class="sidebar sidebar-offcanvas">
-	<ul class="nav">
+	<ul class="nav" *ngIf="user$ | async as user">
 		<li class="nav-item nav-profile">
 			<div class="nav-link">
 				<div class="user-wrapper">
@@ -8,9 +8,9 @@
 					</div>
 
 					<div class="text-wrapper">
-						<p class="profile-name">Lucas Peixoto</p>
+						<p class="profile-name">{{user.name}}</p>
 						<div>
-							<small class="designation text-muted">Desenvolvedor</small>
+							<small class="designation text-muted">Marido</small>
 						</div>
 					</div>
 				</div>

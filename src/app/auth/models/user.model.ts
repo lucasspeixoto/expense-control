@@ -6,7 +6,7 @@
 
 export class User {
 	static fromDataBase({ name, userId, email }) {
-		return new User(userId, name, email);
+		return new User(name, userId, email);
 	}
 
 	constructor(

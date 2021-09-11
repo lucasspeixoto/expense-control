@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/auth/models/user.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import * as fromRoot from '../../../app.reducer';
 
 @Component({
 	selector: 'app-sidebar',
@@ -7,12 +11,18 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 	styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-	constructor(private authService: AuthService) {}
+	user$: Observable<User>;
 
-	ngOnInit(): void {}
+	constructor(
+		private authService: AuthService,
+		private store: Store<fromRoot.AppState>,
+	) {}
+
+	ngOnInit(): void {
+		this.user$ = this.store.select(fromRoot.getIsAuth);
+	}
 
 	onLogout() {
-		console.log('Logout');
 		this.authService.logout();
 	}
 }
