@@ -5,11 +5,12 @@
 				<h4 class="card-title">Incluir Ganho / Despesa</h4>
 				<p class="card-description">Especificar quantidade e tipo</p>
 
-				<form>
+				<form [formGroup]="incomeExpenseForm">
 					<div class="form-group">
 						<label>Descrição</label>
 						<input
 							type="text"
+							formControlName="description"
 							class="form-control"
 							placeholder="Descrição"
 							name="description"
@@ -20,6 +21,7 @@
 						<label>Quantidade</label>
 						<input
 							type="number"
+							formControlName="amount"
 							class="form-control"
 							placeholder="Quantidade"
 							name="amount"
@@ -30,14 +32,31 @@
 					<div class="form-group">
 						<label>Tipo</label>
 						<br />
-						<button type="button" class="btn btn-primary btn-block">
+						<button
+							*ngIf="type === 'income'"
+							(click)="type = 'expense'"
+							type="button"
+							class="btn btn-primary btn-block"
+						>
 							Ganho
 						</button>
-						<!-- <button type="button" class="btn btn-warning btn-block">Egreso</button> -->
+						<button
+							*ngIf="type === 'expense'"
+							(click)="type = 'income'"
+							type="button"
+							class="btn btn-warning btn-block"
+						>
+							Despesa
+						</button>
 					</div>
 
 					<hr />
-					<button type="button" class="btn btn-success mr-2">
+					<button
+						[disabled]="!incomeExpenseForm.valid"
+						(click)="onSubmit()"
+						type="button"
+						class="btn btn-success mr-2"
+					>
 						<i class="fa fa-save"></i>
 						Incluir
 					</button>

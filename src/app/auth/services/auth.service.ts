@@ -27,7 +27,7 @@ import { Title, Text } from '../../shared/messages/messages';
 
 @Injectable()
 export class AuthService {
-	user: User;
+	private _user: User;
 
 	constructor(
 		private router: Router,
@@ -35,6 +35,10 @@ export class AuthService {
 		private angularFirestore: AngularFirestore,
 		private store: Store<fromRoot.AppState>,
 	) {}
+
+	get user() {
+		return this._user;
+	}
 
 	setUserLocally(user: User) {
 		localStorage.setItem('user', JSON.stringify(user));
@@ -53,6 +57,7 @@ export class AuthService {
 					.pipe(take(1))
 					.subscribe((databaseUser: User) => {
 						const user = User.fromDataBase(databaseUser);
+						this._user = user;
 						this.store.dispatch(AUTH.setUser({ user }));
 					});
 			} else {
@@ -78,6 +83,7 @@ export class AuthService {
 				};
 				this.setUserData(user);
 				this.sendVerificationMail();
+				this.router.navigateByUrl('/');
 				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
@@ -97,9 +103,8 @@ export class AuthService {
 				Swal.fire({
 					icon: 'info',
 					title: 'Cadastro realizado',
-					text: 'Verifique sua caixa para confirmação do cadastro',
+					text: 'Verifique sua caixa com e-mail de confirmação',
 				});
-				this.router.navigateByUrl('/login');
 			});
 	}
 
@@ -180,8 +185,8 @@ export class AuthService {
 			.valueChanges()
 			.pipe(take(1))
 			.subscribe((users: User[]) => {
-				this.user = users.find((user: User) => user.userId === userId);
-				this.setUserLocally(this.user);
+				let user = users.find((user: User) => user.userId === userId);
+				this.setUserLocally(user);
 			});
 	}
 
