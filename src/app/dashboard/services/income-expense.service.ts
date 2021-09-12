@@ -17,6 +17,10 @@ import * as fromRoot from '../../app.reducer';
 import { IncomeExpense } from '../models/income-expense.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
+//* Mensagens
+import Swal from 'sweetalert2';
+import { Title, Text } from '../../shared/messages/messages';
+
 @Injectable({
 	providedIn: 'root',
 })
@@ -31,16 +35,22 @@ export class IncomeExpenseService {
 
 	createIncomeOrExpense(item: IncomeExpense) {
 		const userId = this.authService.user.userId;
-
 		this.angularFirestore
-			.doc(`${userId}/incomes-expenses`)
-			.collection('items')
+			.collection(`users/${userId}/incomes-expenses`)
 			.add({ ...item })
-			.then(ref => {
-				console.log('item criado', ref);
+			.then(() => {
+				Swal.fire({
+					icon: 'success',
+					title: 'Item Criado',
+					text: `O item '${item.description}' foi criado com sucesso`,
+				});
 			})
-			.catch(error => console.log('erro', error));
-
-		//return userRef.set(userData, { merge: true });
+			.catch(error => {
+				Swal.fire({
+					icon: 'error',
+					title: `Erro na criação do item - ${error.code}`,
+					text: `Tente novamente, caso o erro pesista contate o administrador`,
+				});
+			});
 	}
 }
