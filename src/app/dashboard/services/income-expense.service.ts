@@ -34,11 +34,13 @@ export class IncomeExpenseService {
 	) {}
 
 	createIncomeOrExpense(item: IncomeExpense) {
+		this.store.dispatch(UI.StartLoading());
 		const userId = this.authService.user.userId;
 		this.angularFirestore
 			.collection(`users/${userId}/incomes-expenses`)
 			.add({ ...item })
 			.then(() => {
+				this.store.dispatch(UI.StopLoading());
 				Swal.fire({
 					icon: 'success',
 					title: 'Item Criado',
@@ -46,6 +48,7 @@ export class IncomeExpenseService {
 				});
 			})
 			.catch(error => {
+				this.store.dispatch(UI.StopLoading());
 				Swal.fire({
 					icon: 'error',
 					title: `Erro na criação do item - ${error.code}`,
