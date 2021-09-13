@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from './auth/guards/auth.guard';
 import { incomeExpenseRoutes } from './incomes-expenses/income-expense.routing';
 import { DashboardComponent } from './incomes-expenses/components/dashboard/dashboard.component';
 
