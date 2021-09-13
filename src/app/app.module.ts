@@ -26,6 +26,7 @@ import { CommonService } from './shared/services/common.service';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { EffectsModule } from '@ngrx/effects';
 import { TypePipe } from './incomes-expenses/pipes/type.pipe';
+import { OrderPipe } from './incomes-expenses/pipes/order.pipe';
 
 @NgModule({
 	declarations: [
@@ -42,6 +43,7 @@ import { TypePipe } from './incomes-expenses/pipes/type.pipe';
 		LoadingComponent,
 		ForgotPasswordComponent,
 		TypePipe,
+  OrderPipe,
 	],
 	imports: [
 		BrowserModule,

@@ -15,7 +15,7 @@
 					</thead>
 
 					<tbody>
-						<tr *ngFor="let item of incomesExpenses$ | async">
+						<tr *ngFor="let item of (incomesExpenses$ | async) | order">
 							<td>{{ item.description }}</td>
 							<td>{{ item.amount | currency: 'BRL' }}</td>
 							<td
