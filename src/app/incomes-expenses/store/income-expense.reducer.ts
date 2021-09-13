@@ -23,4 +23,4 @@ export function incomeExpenseReducer(
 	return _incomeExpenseReducer(state, action);
 }
 
-export const getUserData = (state: IncomeExpenseState) => state.items;
+export const getIncomeExpenseData = (state: IncomeExpenseState) => state.items;
