@@ -13,20 +13,22 @@ import { Store } from '@ngrx/store';
 
 //* Redux
 import * as UI from '../../shared/store/ui/ui.actions';
+import * as AUTH from '../../auth/store/auth.actions';
+import * as ITEMS from '../../incomes-expenses/store/income-expense.actions'
 import * as fromRoot from '../../app.reducer';
 
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { AuthData } from '../models/auth-data.model';
 import { User } from '../models/user.model';
 
 //* Mensagens
 import Swal from 'sweetalert2';
-import { Title, Text } from '../../shared/messages/messages';
+import { Title, Text } from '../../shared/messages/errors';
 
 @Injectable()
 export class AuthService {
-	user: User;
+	private _user: User;
 
 	constructor(
 		private router: Router,
@@ -34,6 +36,10 @@ export class AuthService {
 		private angularFirestore: AngularFirestore,
 		private store: Store<fromRoot.AppState>,
 	) {}
+
+	get user() {
+		return this._user;
+	}
 
 	setUserLocally(user: User) {
 		localStorage.setItem('user', JSON.stringify(user));
@@ -43,19 +49,29 @@ export class AuthService {
 		localStorage.removeItem('user');
 	}
 
-	/* initAuthListener() {
+	initAuthListener() {
 		this.angularFireAuth.authState.subscribe(user => {
 			if (user) {
-				this.store.dispatch(new Auth.SetAuthenticated());
-				this.router.navigate(['/training']);
+				this.angularFirestore
+					.doc(`users/${user.uid}`)
+					.valueChanges()
+					.pipe(take(1))
+					.subscribe((databaseUser: User) => {
+						const user = User.fromDataBase(databaseUser);
+						this._user = user;
+						this.store.dispatch(AUTH.setUser({ user }));
+					});
 			} else {
-				this.trainingService.cancelSubscriptions();
-				this.store.dispatch(new Auth.SetUnauthenticated());
-				this.removeUserLocally();
-				this.router.navigate(['/login']);
+				this.store.dispatch(AUTH.removeUser());
+        this.store.dispatch(ITEMS.removeItems());
+        this.router.navigateByUrl('/login');
 			}
 		});
-	} */
+	}
+
+	isAuth() {
+		return this.angularFireAuth.authState.pipe(map(user => user != null));
+	}
 
 	registerUser(authData: AuthData) {
 		this.store.dispatch(UI.StartLoading());
@@ -69,8 +85,8 @@ export class AuthService {
 					email: result.user.email,
 				};
 				this.setUserData(user);
-				this.setUserLocally(user);
 				this.sendVerificationMail();
+				this.router.navigateByUrl('/');
 				this.store.dispatch(UI.StopLoading());
 			})
 			.catch(error => {
@@ -88,11 +104,11 @@ export class AuthService {
 			.sendEmailVerification()
 			.then(() => {
 				Swal.fire({
+					position: 'top-end',
 					icon: 'info',
-					title: 'E-mail enviado',
-					text: 'Verifique sua caixa para confirmação do cadastro',
+					title: 'Cadastro realizado',
+					text: 'Verifique sua caixa com e-mail de confirmação',
 				});
-				this.router.navigateByUrl('/login');
 			});
 	}
 
@@ -134,7 +150,6 @@ export class AuthService {
 					title: Title[error.code],
 					text: Text[error.code],
 				});
-				this.store.dispatch(UI.StopLoading());
 			});
 	}
 
@@ -147,13 +162,13 @@ export class AuthService {
 			.sendPasswordResetEmail(email)
 			.then(() => {
 				Swal.fire({
+					position: 'top-end',
 					icon: 'info',
 					title: 'E-mail enviado',
 					text: 'O link para alteração foi enviado por e-mail, verifique sua caixa',
 				});
 			})
 			.catch(error => {
-				console.log(error);
 				Swal.fire({
 					icon: 'error',
 					title: Title[error.code],
@@ -164,6 +179,7 @@ export class AuthService {
 
 	logout() {
 		this.removeUserLocally();
+		this.store.dispatch(AUTH.removeUser());
 		this.angularFireAuth.signOut();
 		this.router.navigateByUrl('/login');
 	}
@@ -174,13 +190,13 @@ export class AuthService {
 			.valueChanges()
 			.pipe(take(1))
 			.subscribe((users: User[]) => {
-				this.user = users.find((user: User) => user.userId === userId);
-				this.setUserLocally(this.user);
+				let user = users.find((user: User) => user.userId === userId);
+				this.setUserLocally(user);
 			});
 	}
 
 	setUserData(user: User) {
-		const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+		const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(
 			`users/${user.userId}`,
 		);
 		const userData: User = {

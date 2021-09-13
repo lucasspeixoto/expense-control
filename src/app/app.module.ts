@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
-import { StatisticsComponent } from './income-expenses/statistics/statistics.component';
-import { DetailComponent } from './income-expenses/detail/detail.component';
+import { DashboardComponent } from './incomes-expenses/components/dashboard/dashboard.component';
+import { IncomeExpensesComponent } from './incomes-expenses/components/incomes-expenses/incomes-expenses.component';
+import { StatisticsComponent } from './incomes-expenses/components/statistics/statistics.component';
+import { DetailComponent } from './incomes-expenses/components/detail/detail.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -24,6 +24,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
 import { CommonService } from './shared/services/common.service';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
+import { EffectsModule } from '@ngrx/effects';
+import { TypePipe } from './incomes-expenses/pipes/type.pipe';
+import { OrderPipe } from './incomes-expenses/pipes/order.pipe';
 
 @NgModule({
 	declarations: [
@@ -39,6 +42,8 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 		FooterComponent,
 		LoadingComponent,
 		ForgotPasswordComponent,
+		TypePipe,
+  OrderPipe,
 	],
 	imports: [
 		BrowserModule,
@@ -52,6 +57,7 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
+		EffectsModule.forRoot([]),
 	],
 	providers: [AuthService, CommonService],
 	bootstrap: [AppComponent],
