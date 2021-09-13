@@ -14,6 +14,7 @@ import { Store } from '@ngrx/store';
 //* Redux
 import * as UI from '../../shared/store/ui/ui.actions';
 import * as AUTH from '../../auth/store/auth.actions';
+import * as ITEMS from '../../incomes-expenses/store/income-expense.actions'
 import * as fromRoot from '../../app.reducer';
 
 import { map, take } from 'rxjs/operators';
@@ -62,6 +63,7 @@ export class AuthService {
 					});
 			} else {
 				this.store.dispatch(AUTH.removeUser());
+        this.store.dispatch(ITEMS.removeItems());
 			}
 		});
 	}

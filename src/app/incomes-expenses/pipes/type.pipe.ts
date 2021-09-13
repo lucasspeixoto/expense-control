@@ -8,7 +8,7 @@ export class TypePipe implements PipeTransform {
 		if (value == 'income') {
       return 'Rendimento'
     } else {
-      return 'Desesa'
+      return 'Despesa'
     }
 	}
 }

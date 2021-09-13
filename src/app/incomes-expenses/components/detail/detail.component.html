@@ -5,21 +5,37 @@
 				<h4 class="card-title">Ganhos e Despesas</h4>
 
 				<table class="table">
-					<thead>
+					<thead style="align-items: center">
 						<tr>
 							<th>Descrição</th>
 							<th>Quantidade</th>
 							<th>Tipo</th>
-							<th></th>
+							<th>Ações</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<tr *ngFor="let item of incomesExpenses$ | async">
 							<td>{{ item.description }}</td>
-							<td>{{ item.amount }}</td>
-							<td>{{ item.type | type}}</td>
-							<td>Ações</td>
+							<td>{{ item.amount | currency: 'BRL' }}</td>
+							<td
+								[class.text-success]="item.type === 'income'"
+								[class.text-danger]="item.type === 'expense'"
+							>
+								{{ item.type | type }}
+							</td>
+							<td class="operation-buttons">
+								<!-- <button (click)="editItem(item.id)" type="button" class="btn btn-info">
+									<i class="fa fa-edit"></i>
+								</button> -->
+								<button
+									(click)="deleteItem(item.id)"
+									type="button"
+									class="btn btn-danger"
+								>
+									<i class="fa fa-trash"></i>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>

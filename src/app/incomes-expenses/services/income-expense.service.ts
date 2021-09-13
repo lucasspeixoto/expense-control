@@ -62,6 +62,6 @@ export class IncomeExpenseService {
 						...(doc.payload.doc.data() as IncomeExpense),
 					})),
 				),
-			);
+			)
 	}
 }

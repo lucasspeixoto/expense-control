@@ -22,4 +22,12 @@ export class DetailComponent implements OnInit {
 			.select(fromRoot.getIncomeExpensesData)
 			.pipe(map(item => Object.values(item)));
 	}
+
+  deleteItem(id: string) {
+    console.log(id)
+  }
+
+  editItem(id: string) {
+    console.log(id)
+  }
 }
