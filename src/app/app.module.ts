@@ -25,6 +25,7 @@ import { reducers } from './app.reducer';
 import { CommonService } from './shared/services/common.service';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { EffectsModule } from '@ngrx/effects';
+import { TypePipe } from './incomes-expenses/pipes/type.pipe';
 
 @NgModule({
 	declarations: [
@@ -40,6 +41,7 @@ import { EffectsModule } from '@ngrx/effects';
 		FooterComponent,
 		LoadingComponent,
 		ForgotPasswordComponent,
+		TypePipe,
 	],
 	imports: [
 		BrowserModule,

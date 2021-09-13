@@ -15,10 +15,10 @@
 					</thead>
 
 					<tbody>
-						<tr>
-							<td>Descrição</td>
-							<td>Quantidade</td>
-							<td>Tipo</td>
+						<tr *ngFor="let item of incomesExpenses$ | async">
+							<td>{{ item.description }}</td>
+							<td>{{ item.amount }}</td>
+							<td>{{ item.type | type}}</td>
 							<td>Ações</td>
 						</tr>
 					</tbody>

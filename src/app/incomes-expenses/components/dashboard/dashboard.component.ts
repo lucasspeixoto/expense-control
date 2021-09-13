@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { User } from 'src/app/auth/models/user.model';
 import * as fromRoot from '../../../app.reducer';
 import * as ITEMS from '../../store/income-expense.actions';
