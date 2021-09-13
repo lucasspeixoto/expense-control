@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './auth/components/forgot-password/forgot-password.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { AuthGuard } from './auth/guards/auth.guard';
-import { dashboardRoutes } from './dashboard/dashboard-routing';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { dashboardRoutes } from './incomes-expenses/components/dashboard/dashboard-routing';
+import { DashboardComponent } from './incomes-expenses/components/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },

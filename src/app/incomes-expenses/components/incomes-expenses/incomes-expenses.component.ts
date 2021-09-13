@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IncomeExpense } from './models/income-expense.model';
-import { Item } from './models/item.type';
-import { IncomeExpenseService } from './services/income-expense.service';
+import { IncomeExpense } from '../../models/income-expense.model';
+import { Item } from '../../models/item.type';
+import { IncomeExpenseService } from '../../services/income-expense.service';
 
 @Component({
 	selector: 'app-incomes-expenses',
