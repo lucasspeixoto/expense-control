@@ -4,7 +4,7 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { dashboardRoutes } from './incomes-expenses/components/dashboard/dashboard-routing';
+import { incomeExpenseRoutes } from './incomes-expenses/income-expense.routing';
 import { DashboardComponent } from './incomes-expenses/components/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
 	{
 		path: '',
 		component: DashboardComponent,
-		children: dashboardRoutes,
+		children: incomeExpenseRoutes,
 		canActivate: [AuthGuard],
 	},
 
