@@ -23,7 +23,7 @@ import { User } from '../models/user.model';
 
 //* Mensagens
 import Swal from 'sweetalert2';
-import { Title, Text } from '../../shared/messages/messages';
+import { Title, Text } from '../../shared/messages/errors';
 
 @Injectable()
 export class AuthService {
@@ -101,6 +101,7 @@ export class AuthService {
 			.sendEmailVerification()
 			.then(() => {
 				Swal.fire({
+					position: 'top-end',
 					icon: 'info',
 					title: 'Cadastro realizado',
 					text: 'Verifique sua caixa com e-mail de confirmação',
@@ -158,6 +159,7 @@ export class AuthService {
 			.sendPasswordResetEmail(email)
 			.then(() => {
 				Swal.fire({
+					position: 'top-end',
 					icon: 'info',
 					title: 'E-mail enviado',
 					text: 'O link para alteração foi enviado por e-mail, verifique sua caixa',

@@ -19,15 +19,13 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 
 //* Mensagens
 import Swal from 'sweetalert2';
-import { Title, Text } from '../../shared/messages/messages';
+import { Title, Text } from '../../shared/messages/errors';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class IncomeExpenseService {
 	constructor(
-		private router: Router,
-		private angularFireAuth: AngularFireAuth,
 		private angularFirestore: AngularFirestore,
 		private store: Store<fromRoot.AppState>,
 		private authService: AuthService,
@@ -42,6 +40,7 @@ export class IncomeExpenseService {
 			.then(() => {
 				this.store.dispatch(UI.StopLoading());
 				Swal.fire({
+					position: 'top-end',
 					icon: 'success',
 					title: 'Item Criado',
 					text: `O item '${item.description}' foi criado com sucesso`,
