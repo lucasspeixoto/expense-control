@@ -62,6 +62,13 @@ export class IncomeExpenseService {
 						...(doc.payload.doc.data() as IncomeExpense),
 					})),
 				),
-			)
+			);
+	}
+
+	deleteIncomeExpenseItem(itemId: string) {
+		const userId = this.authService.user.userId;
+		return this.angularFirestore
+			.doc(`users/${userId}/items/${itemId}`)
+			.delete();
 	}
 }

@@ -6,6 +6,7 @@ export const Title = {
 	'auth/email-already-in-use': 'E-mail em uso',
 	'PERMISSION_DENIED': 'Erro ao carregar',
 	'auth/argument-error': 'E-mail inválido',
+  'permission-denied': 'Erro de permissão ou base'
 
 };
 
@@ -19,4 +20,5 @@ export const Text = {
 	'PERMISSION_DENIED':'Usuário não autenticado ou falha ao carregar tarefas, tente novamente mais tarde',
 	'auth/argument-error':
 	'O e-mail não é válido ou não existe em nossos registros',
+  'permission-denied': 'Ocorreu um erro, usuário sem permissão ou instabilidade na base. Contate o administrador (19982621117)'
 };

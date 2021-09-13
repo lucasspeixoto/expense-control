@@ -64,6 +64,7 @@ export class AuthService {
 			} else {
 				this.store.dispatch(AUTH.removeUser());
         this.store.dispatch(ITEMS.removeItems());
+        this.router.navigateByUrl('/login');
 			}
 		});
 	}
