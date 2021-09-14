@@ -4,8 +4,6 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AuthGuard } from './auth/guards/auth.guard';
-import { incomeExpenseRoutes } from './incomes-expenses/income-expense.routing';
-import { DashboardComponent } from './incomes-expenses/components/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -13,9 +11,11 @@ const appRoutes: Routes = [
 	{ path: 'forgot-password', component: ForgotPasswordComponent },
 	{
 		path: '',
-		component: DashboardComponent,
-		children: incomeExpenseRoutes,
-		canActivate: [AuthGuard],
+		loadChildren: () =>
+			import('./incomes-expenses/income-expense.module').then(
+				m => m.IncomeExpenseModule,
+			),
+		canLoad: [AuthGuard],
 	},
 
 	{ path: '**', redirectTo: '' },
