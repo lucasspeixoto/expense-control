@@ -27,7 +27,7 @@ import { ForgotPasswordComponent } from './auth/components/forgot-password/forgo
 import { EffectsModule } from '@ngrx/effects';
 import { TypePipe } from './incomes-expenses/pipes/type.pipe';
 import { OrderPipe } from './incomes-expenses/pipes/order.pipe';
-
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -58,6 +58,7 @@ import { OrderPipe } from './incomes-expenses/pipes/order.pipe';
 			logOnly: environment.production,
 		}),
 		EffectsModule.forRoot([]),
+    ChartsModule
 	],
 	providers: [AuthService, CommonService],
 	bootstrap: [AppComponent],
