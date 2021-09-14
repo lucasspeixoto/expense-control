@@ -7,6 +7,7 @@ import * as fromRoot from '../../../app.reducer';
 import * as ITEMS from '../../store/income-expense.actions';
 import { IncomeExpenseService } from '../../services/income-expense.service';
 import { IncomeExpense } from '../../models/income-expense.model';
+import { getIsAuth } from 'src/app/auth/store/auth.selectors';
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
@@ -22,7 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		const getUser$ = this.store
-			.select(fromRoot.getIsAuth)
+			.select(getIsAuth)
 			.pipe(filter((user: User) => user !== null))
 			.subscribe((user: User) => {
 				const getItems$ = this.incomeExpenseService

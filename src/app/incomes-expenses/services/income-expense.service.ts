@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 
 //* Redux
-import * as UI from '../../shared/store/ui/ui.actions';
+import * as UI from '../../shared/store/ui.actions';
 import * as fromRoot from '../../app.reducer';
 import { IncomeExpense } from '../models/income-expense.model';
 import { AuthService } from 'src/app/auth/services/auth.service';

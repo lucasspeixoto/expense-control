@@ -5,6 +5,7 @@ import * as fromRoot from '../../../app.reducer';
 import { IncomeExpense } from '../../models/income-expense.model';
 
 import { MultiDataSet, Label } from 'ng2-charts';
+import { getIncomeExpensesData } from '../../store/income-expense.selectors';
 @Component({
 	selector: 'app-statistics',
 	templateUrl: './statistics.component.html',
@@ -26,7 +27,7 @@ export class StatisticsComponent implements OnInit {
 
 	ngOnInit() {
 		this.store
-			.select(fromRoot.getIncomeExpensesData)
+			.select(getIncomeExpensesData)
 			.pipe(map(item => Object.values(item)))
 			.subscribe((items: IncomeExpense[]) => this.getStatistics(items));
 	}

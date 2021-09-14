@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
+import { getIsAuth } from 'src/app/auth/store/auth.selectors';
 import * as fromRoot from '../../../app.reducer';
 @Component({
 	selector: 'app-navbar',
@@ -14,6 +15,6 @@ export class NavbarComponent implements OnInit {
 	constructor(private store: Store<fromRoot.AppState>) {}
 
 	ngOnInit(): void {
-		this.user$ = this.store.select(fromRoot.getIsAuth);
+		this.user$ = this.store.select(getIsAuth);
 	}
 }
