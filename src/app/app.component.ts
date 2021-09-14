@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromRoot from './app.reducer';
 import { AuthService } from './auth/services/auth.service';
+import { getIsLoading } from './shared/store/ui.selectors';
 
 @Component({
 	selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+		this.isLoading$ = this.store.select(getIsLoading);
 		this.authService.initAuthListener();
 	}
 }

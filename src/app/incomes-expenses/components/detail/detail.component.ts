@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 //* Mensagens
 import Swal from 'sweetalert2';
 import { Title, Text } from '../../../shared/messages/errors';
+import { getIncomeExpensesData } from '../../store/income-expense.selectors';
 
 @Component({
 	selector: 'app-detail',
@@ -25,7 +26,7 @@ export class DetailComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.incomesExpenses$ = this.store
-			.select(fromRoot.getIncomeExpensesData)
+			.select(getIncomeExpensesData)
 			.pipe(map(item => Object.values(item)));
 	}
 
