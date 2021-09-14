@@ -18,15 +18,12 @@ import { SharedModule } from './shared/shared.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 @NgModule({
-	declarations: [
-		AppComponent,
-    LoadingComponent,
-	],
+	declarations: [AppComponent, LoadingComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		AuthModule,
-    IncomeExpenseModule,
+		IncomeExpenseModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireDatabaseModule,
 		AngularFirestoreModule,
@@ -36,7 +33,6 @@ import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 			logOnly: environment.production,
 		}),
 		EffectsModule.forRoot([]),
-
 	],
 	providers: [CommonService],
 	bootstrap: [AppComponent],

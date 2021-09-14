@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { IncomeExpenseRoutingModule } from './income-expense.routing.module';
 import { ChartsModule } from 'ng2-charts';
+import { StoreModule } from '@ngrx/store';
+import { incomeExpenseReducer } from './store/income-expense.reducer';
 
 @NgModule({
 	declarations: [
@@ -23,9 +25,10 @@ import { ChartsModule } from 'ng2-charts';
 	],
 	imports: [
 		CommonModule,
-    ChartsModule,
-		IncomeExpenseRoutingModule,
 		ReactiveFormsModule,
+		StoreModule.forFeature('incomeExpense', incomeExpenseReducer),
+		ChartsModule,
+		IncomeExpenseRoutingModule,
 		RouterModule,
 		SharedModule,
 	],

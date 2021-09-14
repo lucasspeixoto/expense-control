@@ -6,7 +6,7 @@ import { IncomeExpense } from '../models/income-expense.model';
 })
 export class OrderPipe implements PipeTransform {
 	transform(items: IncomeExpense[]): IncomeExpense[] {
-		return items.sort((item) => {
+		return items.sort(item => {
 			if (item.type === 'income') {
 				return -1;
 			} else {

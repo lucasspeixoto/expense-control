@@ -10,13 +10,11 @@ import * as fromIncomeExpense from './incomes-expenses/store/income-expense.redu
 export interface AppState {
 	ui: fromUi.UiState;
 	auth: fromAuth.AuthState;
-	incomeExpense: fromIncomeExpense.IncomeExpenseState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
 	ui: fromUi.uiReducer,
 	auth: fromAuth.authReducer,
-	incomeExpense: fromIncomeExpense.incomeExpenseReducer,
 };
 
 //* Selectors

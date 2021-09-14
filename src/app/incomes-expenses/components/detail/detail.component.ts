@@ -41,7 +41,7 @@ export class DetailComponent implements OnInit {
 				}),
 			)
 			.catch(error => {
-        console.log(error)
+				console.log(error);
 				Swal.fire({
 					icon: 'error',
 					title: Title[error.code],

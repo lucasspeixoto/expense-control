@@ -23,9 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		const getUser$ = this.store
 			.select(fromRoot.getIsAuth)
-			.pipe(
-				filter((user: User) => user !== null),
-			)
+			.pipe(filter((user: User) => user !== null))
 			.subscribe((user: User) => {
 				const getItems$ = this.incomeExpenseService
 					.initIncomeExpenseListener(user.userId)
@@ -37,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(getUser$);
 	}
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
+	ngOnDestroy() {
+		this.subscriptions.unsubscribe();
+	}
 }

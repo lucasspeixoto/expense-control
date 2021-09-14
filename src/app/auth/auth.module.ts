@@ -10,6 +10,6 @@ import { AuthService } from './services/auth.service';
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent, ForgotPasswordComponent],
 	imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  providers: [AuthService]
+	providers: [AuthService],
 })
 export class AuthModule {}
