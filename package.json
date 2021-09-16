@@ -22,7 +22,6 @@
 		"@ngrx/effects": "^12.4.0",
 		"@ngrx/router-store": "^12.4.0",
 		"@ngrx/store": "^12.4.0",
-		"@ngrx/store-devtools": "^12.4.0",
 		"bootstrap": "^5.1.1",
 		"bootstrap-icons": "^1.5.0",
 		"chart.js": "^2.9.3",

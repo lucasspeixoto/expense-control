@@ -8,13 +8,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
 import { CommonService } from './shared/services/common.service';
 
 import { EffectsModule } from '@ngrx/effects';
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 @NgModule({
@@ -28,10 +26,10 @@ import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 		AngularFireDatabaseModule,
 		AngularFirestoreModule,
 		StoreModule.forRoot(reducers),
-		StoreDevtoolsModule.instrument({
+	/* 	StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
-		}),
+		}), */
 		EffectsModule.forRoot([]),
 	],
 	providers: [CommonService],
