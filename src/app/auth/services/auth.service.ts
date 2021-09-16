@@ -41,14 +41,6 @@ export class AuthService {
 		return this._user;
 	}
 
-	setUserLocally(user: User) {
-		localStorage.setItem('user', JSON.stringify(user));
-	}
-
-	removeUserLocally() {
-		localStorage.removeItem('user');
-	}
-
 	initAuthListener() {
 		this.angularFireAuth.authState.subscribe(user => {
 			if (user) {
@@ -83,6 +75,7 @@ export class AuthService {
 					name: name,
 					userId: result.user.uid,
 					email: result.user.email,
+					photoUrl: null,
 				};
 				this.setUserData(user);
 				this.sendVerificationMail();
@@ -116,8 +109,7 @@ export class AuthService {
 		this.store.dispatch(UI.StartLoading());
 		this.angularFireAuth
 			.signInWithEmailAndPassword(authData.email, authData.password)
-			.then(result => {
-				this.getUserData(result.user.uid);
+			.then(() => {
 				this.router.navigateByUrl('/');
 				this.store.dispatch(UI.StopLoading());
 			})
@@ -135,13 +127,14 @@ export class AuthService {
 		return this.angularFireAuth
 			.signInWithPopup(provider)
 			.then(result => {
+				console.log(result.user.photoURL)
 				let user = {
 					name: result.user.displayName,
 					userId: result.user.uid,
 					email: result.user.email,
+					photoUrl: result.user.photoURL,
 				};
 				this.setUserData(user);
-				this.setUserLocally(user);
 				this.router.navigateByUrl('/');
 			})
 			.catch(error => {
@@ -178,21 +171,9 @@ export class AuthService {
 	}
 
 	logout() {
-		this.removeUserLocally();
 		this.store.dispatch(AUTH.removeUser());
 		this.angularFireAuth.signOut();
 		this.router.navigateByUrl('/login');
-	}
-
-	getUserData(userId: string) {
-		this.angularFirestore
-			.collection(`users`)
-			.valueChanges()
-			.pipe(take(1))
-			.subscribe((users: User[]) => {
-				let user = users.find((user: User) => user.userId === userId);
-				this.setUserLocally(user);
-			});
 	}
 
 	setUserData(user: User) {
@@ -203,6 +184,7 @@ export class AuthService {
 			name: user.name,
 			userId: user.userId,
 			email: user.email,
+			photoUrl: user.photoUrl,
 		};
 		return userRef.set(userData, { merge: true });
 	}
