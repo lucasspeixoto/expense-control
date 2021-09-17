@@ -26,7 +26,7 @@ import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 		AngularFireDatabaseModule,
 		AngularFirestoreModule,
 		StoreModule.forRoot(reducers),
-	/* 	StoreDevtoolsModule.instrument({
+		/* 	StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
 		}), */

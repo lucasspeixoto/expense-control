@@ -39,12 +39,12 @@
 								{
 									"type": "initial",
 									"maximumWarning": "2mb",
-                  "maximumError": "5mb"
+									"maximumError": "5mb"
 								},
 								{
 									"type": "anyComponentStyle",
 									"maximumWarning": "2mb",
-                  "maximumError": "5mb"
+									"maximumError": "5mb"
 								}
 							],
 							"fileReplacements": [
@@ -57,12 +57,12 @@
 						},
 						"development": {
 							"buildOptimizer": false,
-              "optimization": false,
-              "outputHashing": "all",
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+							"optimization": false,
+							"outputHashing": "all",
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
 						}
 					},
 					"defaultConfiguration": "production"

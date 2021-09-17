@@ -1,4 +1,5 @@
-<nav *ngIf="user$ | async as user"
+<nav
+	*ngIf="user$ | async as user"
 	class="navbar default-layout col-sm-12 col-12 p-0 fixed-top d-flex flex-row"
 >
 	<div
@@ -12,7 +13,6 @@
 	>
 		<a class="navbar-brand brand-logo">
 			<img src="assets/images/logo.svg" alt="logo" />
-
 		</a>
 		<a class="navbar-brand brand-logo-mini">
 			<img src="assets/images/logo-mini.svg" alt="logo" />
@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="navbar-menu-wrapper d-flex align-items-center">
-		<ul class="navbar-nav navbar-nav-right" >
+		<ul class="navbar-nav navbar-nav-right">
 			<li class="nav-item d-none d-sm-inline-block">
 				<a
 					class="nav-link"
@@ -30,16 +30,18 @@
 					aria-expanded="false"
 				>
 					<span class="profile-text">Olá, {{ user.name }} !</span>
-					<img *ngIf="user.photoUrl"
+					<img
+						*ngIf="user.photoUrl"
 						class="img-xs rounded-circle"
 						[src]="user.photoUrl"
 						alt="Profile image"
 					/>
-          <img *ngIf="!user.photoUrl"
-          class="img-xs rounded-circle"
-          src="assets/images/dummy-user.png"
-          alt="Profile image"
-        />
+					<img
+						*ngIf="!user.photoUrl"
+						class="img-xs rounded-circle"
+						src="assets/images/dummy-user.png"
+						alt="Profile image"
+					/>
 				</a>
 			</li>
 		</ul>

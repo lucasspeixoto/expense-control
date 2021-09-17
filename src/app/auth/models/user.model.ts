@@ -7,6 +7,6 @@ export class User {
 		public name: string,
 		public userId: string,
 		public email: string,
-    public photoUrl: string,
+		public photoUrl: string,
 	) {}
 }

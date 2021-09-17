@@ -127,7 +127,7 @@ export class AuthService {
 		return this.angularFireAuth
 			.signInWithPopup(provider)
 			.then(result => {
-				console.log(result.user.photoURL)
+				console.log(result.user.photoURL);
 				let user = {
 					name: result.user.displayName,
 					userId: result.user.uid,

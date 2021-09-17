@@ -54,3 +54,7 @@ firestore.indexes.json
 firestore.rules
 .github
 .firebase
+database.rules.json
+
+# Images, Gifs and vides
+/presentation.gif

@@ -1,17 +1,25 @@
 <nav class="sidebar sidebar-offcanvas" *ngIf="user$ | async as user">
-	<ul class="nav" >
+	<ul class="nav">
 		<li class="nav-item nav-profile">
 			<div class="nav-link">
 				<div class="user-wrapper">
 					<div class="profile-image">
-            <img *ngIf="user.photoUrl" [src]="user.photoUrl" alt="profile image" />
-						<img *ngIf="!user.photoUrl" src="assets/images/dummy-user.png" alt="profile image" />
+						<img
+							*ngIf="user.photoUrl"
+							[src]="user.photoUrl"
+							alt="profile image"
+						/>
+						<img
+							*ngIf="!user.photoUrl"
+							src="assets/images/dummy-user.png"
+							alt="profile image"
+						/>
 					</div>
 
 					<div class="text-wrapper">
 						<p class="profile-name">{{ user.name }}</p>
 						<div>
-							<small class="designation text-muted">Marido</small>
+							<small class="designation text-muted">Finanças</small>
 						</div>
 					</div>
 				</div>
