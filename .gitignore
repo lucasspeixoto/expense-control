@@ -54,3 +54,4 @@ firestore.indexes.json
 firestore.rules
 .github
 .firebase
+database.rules.json

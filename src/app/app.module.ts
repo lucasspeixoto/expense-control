@@ -14,7 +14,6 @@ import { CommonService } from './shared/services/common.service';
 
 import { EffectsModule } from '@ngrx/effects';
 import { AuthModule } from './auth/auth.module';
-import { SharedModule } from './shared/shared.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { IncomeExpenseModule } from './incomes-expenses/income-expense.module';
 @NgModule({
