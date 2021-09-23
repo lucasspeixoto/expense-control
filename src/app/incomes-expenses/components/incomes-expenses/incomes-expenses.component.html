@@ -1,10 +1,9 @@
 <div class="row">
-	<div class="col-12">
+	<div class="col-6">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Incluir Ganho / Despesa</h4>
 				<p class="card-description">Especificar quantidade e tipo</p>
-
 				<form [formGroup]="incomeExpenseForm">
 					<div class="form-group">
 						<label>Descrição</label>
@@ -26,7 +25,50 @@
 							placeholder="Quantidade"
 							name="amount"
 						/>
-						<p>A Quantidade deve ser positiva</p>
+						<p>A quantidade deve ser positiva</p>
+					</div>
+
+					<div class="form-group">
+						<label>Categoria</label>
+						<select
+							aria-label=".form-select-lg example"
+							formControlName="category"
+							class="form-control form-select"
+							list="datalistOptions"
+							placeholder="Categoria"
+						>
+							<option value="" disabled selected hidden>Categoria</option>
+							<option *ngFor="let item of categoryOptions" [value]="item">
+								{{ item }}
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>Frequência</label>
+						<select
+							aria-label=".form-select-lg example"
+							formControlName="frequency"
+							class="form-control form-select"
+							list="datalistOptions"
+							placeholder="Frequência"
+						>
+							<option value="" disabled selected hidden>Frequência</option>
+							<option *ngFor="let item of frequencyOptions" [value]="item">
+								{{ item }}
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>Data</label>
+						<input
+							type="date"
+							formControlName="date"
+							class="form-control"
+							placeholder="Data"
+							name="date"
+						/>
 					</div>
 
 					<div class="form-group">
@@ -49,7 +91,6 @@
 							Despesa
 						</button>
 					</div>
-
 					<hr />
 					<button
 						[disabled]="!incomeExpenseForm.valid"
@@ -60,16 +101,41 @@
 						<i class="fa fa-save"></i>
 						Incluir
 					</button>
-
-					<!--
-              <button disabled class="btn btn-success mr-2">
-                <i class="fa fa-spin fa-sync"></i>
-                Espere por favor...
-              </button>
-            -->
-
 					<button type="reset" class="btn btn-light">Cancelar</button>
 				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-6">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Definições</h4>
+				<!-- <table class="table">
+					<thead style="align-items: center">
+						<tr>
+							<th>Descrição</th>
+							<th>Quantidade</th>
+							<th>Tipo</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>Coluna 1</td>
+							<td>Teste</td>
+							<td>
+								{{ item.type | type }}
+							</td>
+							<td class="operation-buttons">
+								<button type="button" class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table> -->
 			</div>
 		</div>
 	</div>
